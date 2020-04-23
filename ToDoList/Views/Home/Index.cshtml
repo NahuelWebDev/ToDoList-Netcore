@@ -1,0 +1,27 @@
+﻿@{
+    ViewData["Title"] = "Home page";
+}
+@model List<Note>
+    <form method="post" asp-controller="Home" asp-action="Index">
+        <div class="row">
+            <div class="col-12 text-center my-2">
+                <textarea id="NoteEdit" name="NoteEdit" onclick="cliccato()" maxlength="500"></textarea>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12 text-center my-2">
+                <button type="submit" id="btnSalva">Salva</button>
+            </div>
+        </div>
+    </form>
+    <section class="listNote text-center">
+        <h2>Note</h2>
+        @foreach (Note note in Model)
+        {
+            String imgID = note.id.ToString();
+            <div class="bloccoNota"> 
+                <div class="col-12"  id="@imgID"><button class="btnDelete" onclick="location.href='@Url.Action("Delete","Home",new { id = imgID })'">Delete</button></div>
+                <div class="col-12 nota">@note.contenuto</div>
+            </div>
+        }
+    </section>
